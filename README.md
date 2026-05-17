@@ -75,3 +75,78 @@
 
 
 ### Q7: The attacker was searching for data belonging to one of the company's projects, can you find the name of the project?
+### Sol: Filtering the logs to match any log that has the word project in it's payload we got only four logs:
+<img width="2537" height="521" alt="image" src="https://github.com/user-attachments/assets/482f49dd-be93-4dc4-95f3-e8762a3aef61" />
+
+### examining them to find the project :
+<img width="2559" height="428" alt="project" src="https://github.com/user-attachments/assets/2d128228-fd9a-4380-a2e3-96ca71f5266f" />
+
+
+
+
+### Ans: project48
+<img width="1253" height="297" alt="image" src="https://github.com/user-attachments/assets/570e40eb-0c0b-441f-b208-b6c38b71e48c" />
+
+### Q8: What is the IP address of the first infected machine?
+### Sol: From the same log that we found the project we can determine the ip of the infected victim:
+
+<img width="2119" height="441" alt="victim" src="https://github.com/user-attachments/assets/ef66e46d-e233-4c2e-9123-22a430e56205" />
+
+### Ans: 192[.]168[.]10[.]15
+<img width="1256" height="263" alt="image" src="https://github.com/user-attachments/assets/235d9d0c-5efd-420a-8229-6638daa5fd1c" />
+
+### Q9: What is the username of the infected employee using 192.168.10.15?
+### Sol: From the same log:
+<img width="2527" height="806" alt="victim user" src="https://github.com/user-attachments/assets/a9e91d62-7981-4bc9-bac1-d38f404b95b5" />
+
+### Ans: nour
+<img width="1258" height="258" alt="image" src="https://github.com/user-attachments/assets/245f04cf-ae90-4b29-8d3d-dc8ec23e0003" />
+
+### Q10: Hackers do not like logging, what logging was the attacker checking to see if enabled?
+### Sol: From the previous question we know that the user nour and log source is HD-FIN-03 we filter with this two we will see a lot of powershell use.
+<img width="2464" height="623" alt="image" src="https://github.com/user-attachments/assets/1abae019-60fb-4657-a93b-c02c46944886" />
+
+
+### Ans: PowerShell
+<img width="1270" height="269" alt="image" src="https://github.com/user-attachments/assets/c8b915e7-6ac6-4721-94ca-9ea0262b532e" />
+
+### Q11: Name of the second system the attacker targeted to cover up the employee?
+### Sol: Filter logs with Process comandline that contains del: 
+<img width="2559" height="684" alt="image" src="https://github.com/user-attachments/assets/e3bcb310-a2a7-4bad-ae02-a2206d19e9ad" />
+
+Navigating throw the logs we found this:
+<img width="2464" height="441" alt="logs" src="https://github.com/user-attachments/assets/dd018215-6e36-4a9d-b8f7-a8adaaf76ef0" />
+
+
+### Ans: mgnt-01
+<img width="1256" height="256" alt="image" src="https://github.com/user-attachments/assets/e4023df7-092e-418a-a7a4-9bea576f881c" />
+
+
+### Q12: When was the first malicious connection to the domain controller (log start time - hh:mm:ss)?
+### Sol: knowing the infected machine searching with it's ip address and network connection there is some logs sort it by time to see the first creations:
+<img width="2559" height="981" alt="image" src="https://github.com/user-attachments/assets/1e7f492f-d85e-4d6c-a35a-0d8fa3047d60" />
+
+going throw the logs we found that notebad.exe establish a network connection:
+<img width="2559" height="947" alt="time" src="https://github.com/user-attachments/assets/7fda7828-6f86-47b1-b3cd-c4b4d4077ab3" />
+
+
+### Ans: 11:14:10
+<img width="1236" height="254" alt="image" src="https://github.com/user-attachments/assets/87cdcf9c-3238-4157-9ad1-effe2c005ad9" />
+
+### Q13: What is the md5 hash of the malicious file?
+### Sol: filter for hashes in the logs payload:
+<img width="2559" height="758" alt="tt" src="https://github.com/user-attachments/assets/1f1aac03-8a54-451a-8d4e-563eeb827c0f" />
+
+
+### From FileCreate Event we found the malicious file that the malware downloads `important_instructions.docx`
+<img width="2326" height="342" alt="aa" src="https://github.com/user-attachments/assets/3b421947-6d56-45b7-8b40-131443cf8c34" />
+
+
+### Ans: 9D08221599FCD9D35D11F9CBD6A0DEA3
+<img width="1247" height="272" alt="image" src="https://github.com/user-attachments/assets/8a1ba762-4002-46a1-94e8-568d59218552" />
+
+### Q14: What is the MITRE persistence technique ID used by the attacker?
+### Sol:
+### Ans:
+
+
