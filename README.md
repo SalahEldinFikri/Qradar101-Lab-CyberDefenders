@@ -1,4 +1,4 @@
-# Qradar101-Lab-CyberDefenders
+<img width="2545" height="915" alt="image" src="https://github.com/user-attachments/assets/fab9e8fc-383c-4e0f-aeb0-a47a1d948b66" /># Qradar101-Lab-CyberDefenders
 ### Analyze diverse log sources in QRadar SIEM to identify compromised systems, detect malicious tools, and reconstruct the sequence of attack events.
 
 ## Scenario:
@@ -146,7 +146,101 @@ going throw the logs we found that notebad.exe establish a network connection:
 <img width="1247" height="272" alt="image" src="https://github.com/user-attachments/assets/8a1ba762-4002-46a1-94e8-568d59218552" />
 
 ### Q14: What is the MITRE persistence technique ID used by the attacker?
-### Sol:
-### Ans:
+### Sol: Searching for any change in registry keys we found that the attacker add a vbs file to the run key to make the malware run at start.
+<img width="2545" height="915" alt="image" src="https://github.com/user-attachments/assets/4d373d56-3487-4449-a208-08c0b4428937" />
+### From the first infected device:
+<img width="2377" height="445" alt="image" src="https://github.com/user-attachments/assets/e0af1011-8eee-4805-a4e8-29f3ccb1f035" />
+
+### Ans: T1547.001
+<img width="1243" height="258" alt="image" src="https://github.com/user-attachments/assets/b9e8fced-50df-4ae1-8af2-2228b317da56" />
+
+### Q15: What protocol is used to perform host discovery?
+### Sol: knowing the IP for the first machine that infected so we filter with it for all the network flow that is not TCP or UDP:
+<img width="2547" height="802" alt="image" src="https://github.com/user-attachments/assets/bbe4f6f3-3ae8-43fb-9a2e-945207015d28" />
 
 
+### From the logs the protocol is ICMP 
+
+### Ans: ICMP
+<img width="1262" height="259" alt="image" src="https://github.com/user-attachments/assets/3d2dfb05-1e3d-4e6b-89e0-c1c2471e1da9" />
+
+### Q16: What is the email service used by the company?(one word)
+### Sol: knowing that the connection will be outside the compeny network we will filter with destination port equal to 53 dns port:
+<img width="2545" height="614" alt="image" src="https://github.com/user-attachments/assets/c172e581-2d20-452d-b6b6-87511f0ee85f" />
+
+### Searching for info about ip 13.107.252.10:
+<img width="788" height="268" alt="image" src="https://github.com/user-attachments/assets/2a5d4fac-6a97-403f-a7a4-0a5c6aa02db6" />
+
+### Knowing that the ip belongs to microsoft and microsoft provides three services for emails (Microsoft Exchange, Microsoft Outlook, Office 365)
+
+### Ans: office365
+<img width="1269" height="276" alt="image" src="https://github.com/user-attachments/assets/2ac2a13a-d9c9-4efb-a3dd-338db5548d65" />
+
+### Q17: What is the name of the malicious file used for the initial infection?
+### Sol: From question 13 when we got the md5 for the file.
+### Ans: important_instructions.docx
+<img width="1280" height="261" alt="image" src="https://github.com/user-attachments/assets/2c6d5069-ddd1-4b50-bb2f-ff071147adf8" />
+
+### Q18: What is the name of the new account added by the attacker?
+### Sol: Filtering with event id = 4720:
+<img width="2559" height="438" alt="image" src="https://github.com/user-attachments/assets/5d9a0c4c-6b5c-444c-a62e-3ee38e3b76b8" />
+### we got the user :
+<img width="2542" height="454" alt="image" src="https://github.com/user-attachments/assets/718d43c7-4c22-4944-b7fa-59c1dd3210d0" />
+
+### Ans: rambo
+<img width="1260" height="272" alt="image" src="https://github.com/user-attachments/assets/9a2a00df-7ae7-4cfd-9fc5-40f0398f62c4" />
+
+### Q19: What is the PID of the process that performed injection?
+### Sol: Filtering with eventids (1, 10, 8)
+<img width="2556" height="577" alt="image" src="https://github.com/user-attachments/assets/96d25e00-1560-4334-876c-6e7eaf81ec80" />
+
+### searching in create remote thread we found that a process creates a thread in another process.
+<img width="2176" height="453" alt="image" src="https://github.com/user-attachments/assets/ffd74ba6-45af-4772-88ed-1e1426baae2b" />
+
+
+### Ans: 7384 
+<img width="1253" height="262" alt="image" src="https://github.com/user-attachments/assets/2fdca19d-f560-43c2-b9b4-0e77c5259276" />
+
+### Q20: What is the name of the tool used for lateral movement?
+### Sol: Searching for cmd or powershell commands:
+<img width="2557" height="1107" alt="image" src="https://github.com/user-attachments/assets/43d5da6d-45d1-4420-8f5f-34426a641742" />
+
+### Founding that the attacker used the registres to move from a device to another `cmd.exe /Q /c reg query HKLM\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging 1> \\127.0.0.1\ADMIN$\__1604913874.5822518 2>&1`
+
+### Searching on google we found a [github ](https://github.com/SecureAuthCorp/impacket)
+
+### Ans: wmiexec.py
+<img width="1256" height="265" alt="image" src="https://github.com/user-attachments/assets/9344dab6-09a6-4be0-9af7-de6cb71b2fc8" />
+
+
+### Q21: Attacker exfiltrated one file, what is the name of the tool used for exfiltration
+### Sol: using the same filter founding that the attacker use curl to uplaod a file to his ip:
+<img width="2550" height="921" alt="image" src="https://github.com/user-attachments/assets/51c726a6-7c74-4107-af00-b912da1fc66a" />
+
+
+### Ans: curl
+<img width="1240" height="254" alt="image" src="https://github.com/user-attachments/assets/c3a20594-e319-46c3-804b-3a3e306647dc" />
+
+### Q22: Who is the other legitimate domain admin other than the administrator?
+### Sol: Filtering with username and Successful logon with administrative or special privileges:
+
+<img width="2532" height="617" alt="image" src="https://github.com/user-attachments/assets/b875a1aa-7bd1-4e24-9395-b48904ca301a" />
+
+
+### Ans: adam
+<img width="1249" height="262" alt="image" src="https://github.com/user-attachments/assets/b5fb0169-8b3d-469d-b28e-110e51247a38" />
+
+### Q23: The attacker used the host discovery technique to know how many hosts available in a certain network, what is the network the hacker scanned from the host IP 1 to 30?
+### Sol: filtering with the ip address of the infected device `192.168.10.15` with log source `Zeek-conn`:
+<img width="2559" height="955" alt="image" src="https://github.com/user-attachments/assets/c821b725-da98-49d2-8190-59076f939f61" />
+
+### Ans: 192.168.20.0
+<img width="1247" height="289" alt="image" src="https://github.com/user-attachments/assets/b264d84d-e7b9-489c-8da2-a051586b07f9" />
+
+### Q24: What is the name of the employee who hired the attacker?
+### Sol: From the cmd commands the attacker takes sami document then delete it form the devices:
+<img width="1688" height="777" alt="image" src="https://github.com/user-attachments/assets/aa10f066-bac6-4e35-8214-30b4ebd14046" />
+
+
+### Ans: sami
+<img width="1258" height="271" alt="image" src="https://github.com/user-attachments/assets/8bfc2f84-a741-4c54-b688-bbcc45356cc7" />
